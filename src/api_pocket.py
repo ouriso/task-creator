@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import requests
 import logging
 import webbrowser
 
+=======
+import logging
+import webbrowser
+
+import requests
+
+>>>>>>> Add pocket oauth script
 
 class PocketApi:
     URL = 'https://getpocket.com'
