@@ -19,7 +19,7 @@ class PocketApi:
     def url(self, path: str):
         return f'{self.URL}/{self.VERSION}/{path}'
 
-    def request(self, url: str, data: dict = {},
+    def request(self, url: str, data: dict,
                 method: callable = requests.get):
         response = method(url, json=data, headers=self.HEADERS)
 
@@ -32,7 +32,18 @@ class PocketApi:
 
         return response
 
-    def ouath_request(self):
+    def get(self):
+        url = self.url('get')
+
+        response = self.request(url, {
+            'consumer_key': self.CONSUMER_KEY,
+            'access_token': self.TOKEN,
+            'detailType': 'simple'
+        }, requests.post)
+
+        return response.json()['list']
+
+    def oauth_request(self):
         url = self.url('oauth/request')
 
         response = self.request(url, {
@@ -42,7 +53,7 @@ class PocketApi:
 
         return response.json()['code']
 
-    def ouath_authorize(self, code):
+    def oauth_authorize(self, code):
         url = self.url('oauth/authorize')
 
         response = self.request(url, {
