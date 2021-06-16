@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 from pocket_app import random_to_read_item
-from todoist.api import TodoistAPI
+from todoist import TodoistAPI
 
 load_dotenv()
 
