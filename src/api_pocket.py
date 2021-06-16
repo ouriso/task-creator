@@ -16,12 +16,10 @@ class PocketApi:
         self.CONSUMER_KEY = consumer_key
         self.TOKEN = token
 
-    def url(self, path: str):
-        return f'{self.URL}/{self.VERSION}/{path}'
-
-    def request(self, url: str, data: dict,
-                method: callable = requests.get):
-        response = method(url, json=data, headers=self.HEADERS)
+    def request(self, path: str, data: dict,
+                method: callable = requests.post):
+        response = method(f'{self.URL}/{self.VERSION}/{path}',
+                          json=data, headers=self.HEADERS)
 
         if response.status_code != 200:
             logging.error(
@@ -33,33 +31,27 @@ class PocketApi:
         return response
 
     def get(self):
-        url = self.url('get')
-
-        response = self.request(url, {
+        response = self.request('get', {
             'consumer_key': self.CONSUMER_KEY,
             'access_token': self.TOKEN,
             'detailType': 'simple'
-        }, requests.post)
+        })
 
         return response.json()['list']
 
     def oauth_request(self):
-        url = self.url('oauth/request')
-
-        response = self.request(url, {
+        response = self.request('oauth/request', {
             'consumer_key': self.CONSUMER_KEY,
             'redirect_uri': 'task-creator:authorizationFinished'
-        }, requests.post)
+        })
 
         return response.json()['code']
 
     def oauth_authorize(self, code):
-        url = self.url('oauth/authorize')
-
-        response = self.request(url, {
+        response = self.request('oauth/authorize', {
             'consumer_key': self.CONSUMER_KEY,
             'code': code
-        }, requests.post)
+        })
 
         return response.json()
 
