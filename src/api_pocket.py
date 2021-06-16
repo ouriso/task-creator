@@ -1,6 +1,7 @@
-import requests
 import logging
 import webbrowser
+
+import requests
 
 
 class PocketApi:
