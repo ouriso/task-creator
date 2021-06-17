@@ -10,10 +10,10 @@ POCKET_CONSUMER_KEY = os.getenv('POCKET_CONSUMER_KEY')
 
 pocket_api = PocketApi(POCKET_CONSUMER_KEY)
 
-code = pocket_api.ouath_request()
+code = pocket_api.oauth_request()
 pocket_api.redirect_to_auth(code)
 
 input()
 
-response = pocket_api.ouath_authorize(code)
+response = pocket_api.oauth_authorize(code)
 print(response)
