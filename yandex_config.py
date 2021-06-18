@@ -15,5 +15,6 @@ yandex_api = YandexApi(CLIENT_ID, ACCESS_TOKEN)
 
 def get_config():
     href = yandex_api.get_disk_download(f'{APP_PATH}/{CONFIG_NAME}')['href']
-
-    return requests.get(href).json()
+    config = requests.get(href)
+    config.encoding = 'utf-8'
+    return config.json()
