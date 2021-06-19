@@ -4,7 +4,7 @@ import random
 
 from dotenv import load_dotenv
 
-from src.api_pocket import PocketApi
+from ..api_pocket import PocketApi
 
 
 load_dotenv()
@@ -17,7 +17,7 @@ ACCESS_TOKEN = os.getenv('POCKET_TOKEN')
 pocket_api = PocketApi(CONSUMER_KEY, ACCESS_TOKEN)
 
 
-def random_to_read_item() -> Dict:
+def pocket_article() -> Dict:
     to_read = pocket_api.get()
     if len(to_read) == 0:
         return {}
@@ -28,3 +28,6 @@ def random_to_read_item() -> Dict:
         'item_url': item[1].get('resolved_url')
     }
     return item_data
+
+
+print(pocket_article())

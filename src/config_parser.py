@@ -5,17 +5,22 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, validator
 
 
-class Plugin(BaseModel):
+class PluginCreate(BaseModel):
+    name: str
+    params: Dict[str, Any]
+
+
+class PluginFilter(BaseModel):
     name: str
     params: Dict[str, Any]
 
 
 class What(BaseModel):
-    content: str
     project: str
-    priority: int
-    due: str
-    plugin: Optional[Plugin] = None
+    content: str
+    priority: Optional[int] = 1
+    due: Optional[str] = None
+    plugin: Optional[PluginCreate] = None
 
     @validator('priority')
     def priority_validator(cls, v):
@@ -24,21 +29,21 @@ class What(BaseModel):
         return v
 
 
-class Plugin1(BaseModel):
-    name: str
-    params: Dict[str, Any]
-
-
-class When(BaseModel):
-    days: List[str]
-    plugins: Optional[List[Plugin1]] = None
-
-
 class Task(BaseModel):
     what: What
-    when: When
+    when: Optional[List[PluginFilter]] = []
+
+    def check(self):
+        return True
+
+    def get_content(self):
+        return {
+            'project': self.what.project,
+            'content': self.what.content,
+            'due': {'string': self.what.due}
+        }
 
 
-class Model(BaseModel):
+class Config(BaseModel):
     tasks: List[Task]
     version: int
