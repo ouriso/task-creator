@@ -7,7 +7,7 @@ from .plugin_create import PluginCreate
 
 class What(BaseModel):
     project: str
-    content: str
+    content: Optional[str]
     priority: Optional[int] = 1
     due: Optional[str] = None
     plugin: Optional[PluginCreate] = None

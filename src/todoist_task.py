@@ -19,6 +19,9 @@ def get_project_id(project: str):
 
 
 def create_task(project: str, content: str, due: str) -> None:
+    if not content:
+        return
+
     project_id = get_project_id(project)
 
     api.items.add(content, project_id=project_id, due=due)

@@ -20,8 +20,20 @@ class Task(BaseModel):
         return True
 
     def get_params(self):
-        return {
+        params = {
             'project': self.what.project,
-            'content': self.what.content,
-            'due': {'string': self.what.due}
         }
+
+        if (self.what.content):
+            params['content'] = self.what.content
+
+        if (self.what.due):
+            params['due'] = {'string': self.what.due}
+
+        if self.what.plugin:
+            params = {
+                **self.what.plugin.apply(),
+                **params
+            }
+
+        return params
