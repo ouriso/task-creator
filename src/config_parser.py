@@ -4,15 +4,8 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, validator
 
-
-class PluginCreate(BaseModel):
-    name: str
-    params: Dict[str, Any]
-
-
-class PluginFilter(BaseModel):
-    name: str
-    params: Dict[str, Any]
+from src.plugin_create import PluginCreate
+from src.plugin_filter import PluginFilter
 
 
 class What(BaseModel):
@@ -22,7 +15,7 @@ class What(BaseModel):
     due: Optional[str] = None
     plugin: Optional[PluginCreate] = None
 
-    @validator('priority')
+    @ validator('priority')
     def priority_validator(cls, v):
         if v not in range(1, 5):
             raise ValueError('priority must be in range 1-4')
@@ -34,9 +27,13 @@ class Task(BaseModel):
     when: Optional[List[PluginFilter]] = []
 
     def check(self):
+        for plugin in self.when:
+            if not plugin.apply():
+                return False
+
         return True
 
-    def get_content(self):
+    def get_params(self):
         return {
             'project': self.what.project,
             'content': self.what.content,

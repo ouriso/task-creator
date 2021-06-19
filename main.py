@@ -9,6 +9,6 @@ config = Config(**json)
 
 for task in config.tasks:
     if task.check():
-        create_task(**task.get_content())
+        create_task(**task.get_params())
 
 commit()
