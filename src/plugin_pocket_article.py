@@ -4,7 +4,7 @@ import random
 
 from dotenv import load_dotenv
 
-from src.api_pocket import PocketApi
+from .api.pocket import PocketApi
 
 
 load_dotenv()

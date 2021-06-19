@@ -1,5 +1,5 @@
 import requests
-from src.api_yandex import YandexApi
+from .api.yandex import YandexApi
 from dotenv import load_dotenv
 import os
 

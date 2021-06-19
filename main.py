@@ -1,6 +1,6 @@
 
 from src.get_config import get_config
-from src.config_parser import Config
+from src.models.config import Config
 from src.todoist_task import commit, create_task
 
 json = get_config()

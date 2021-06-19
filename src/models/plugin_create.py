@@ -1,4 +1,4 @@
-from src.plugin import Plugin
+from .plugin import Plugin
 
 registry = {
 }
