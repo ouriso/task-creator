@@ -12,7 +12,7 @@ class What(BaseModel):
     due: Optional[str] = None
     plugin: Optional[PluginCreate] = None
 
-    @ validator('priority')
+    @validator('priority')
     def priority_validator(cls, v):
         if v not in range(1, 5):
             raise ValueError('priority must be in range 1-4')
