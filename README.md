@@ -4,6 +4,8 @@ Automatically creates tasks depending on certain conditions
 ## Install
 
 ```bash
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -11,11 +13,11 @@ pip install -r requirements.txt
 For yandex token
 
 ```
-python src/oauth_yandex.py
+python3 src/oauth_yandex.py
 ```
 
 For pocket token
 
 ```
-python src/oauth_pocket.py
+python3 src/oauth_pocket.py
 ```
