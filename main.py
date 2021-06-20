@@ -8,7 +8,7 @@ json = get_config()
 config = Config(**json)
 
 for task in config.tasks:
-    if task.check():
+    if task.should_create():
         create_task(**task.get_params())
 
 commit()
