@@ -12,7 +12,7 @@ class Task(BaseModel):
     what: What
     when: Optional[List[PluginFilter]] = []
 
-    def check(self):
+    def should_create(self):
         for plugin in self.when:
             if not plugin.apply():
                 return False
