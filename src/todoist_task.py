@@ -7,7 +7,7 @@ load_dotenv()
 
 TODOIST_TOKEN = os.getenv('TODOIST_TOKEN')
 
-api = TodoistAPI(TODOIST_TOKEN)
+api = TodoistAPI(TODOIST_TOKEN, cache='/tmp/')
 api.sync()
 
 

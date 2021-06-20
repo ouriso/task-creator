@@ -3,12 +3,14 @@ from src.get_config import get_config
 from src.models.config import Config
 from src.todoist_task import commit, create_task
 
-json = get_config()
 
-config = Config(**json)
+def task(request, context):
+    json = get_config()
 
-for task in config.tasks:
-    if task.should_create():
-        create_task(**task.get_params())
+    config = Config(**json)
 
-commit()
+    for task in config.tasks:
+        if task.should_create():
+            create_task(**task.get_params())
+
+    commit()
