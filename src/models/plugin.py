@@ -1,13 +1,14 @@
+from typing import Dict, Union
+
 from pydantic import BaseModel
-from typing import Any, Dict
 
 
 class Plugin(BaseModel):
     name: str
-    params: Dict[str, Any] = {}
+    params: Dict[str, any] = {}
     registry = {}
 
-    def apply(self):
+    def apply(self) -> Union[dict, bool]:
         plugin = self.registry[self.name]
 
         return plugin(**self.params)

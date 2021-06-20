@@ -21,3 +21,12 @@ For pocket token
 ```
 python3 src/oauth_pocket.py
 ```
+
+Enviroment variables
+```
+POCKET_CONSUMER_KEY
+POCKET_TOKEN
+YANDEX_CLIENT_ID
+YANDEX_TOKEN
+TODOIST_TOKEN
+```

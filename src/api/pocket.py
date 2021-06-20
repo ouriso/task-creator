@@ -1,7 +1,9 @@
 import logging
 import webbrowser
+from typing import Dict
 
 import requests
+from requests.models import Response
 
 
 class PocketApi:
@@ -17,7 +19,7 @@ class PocketApi:
         self.TOKEN = token
 
     def request(self, path: str, data: dict,
-                method: callable = requests.post):
+                method: callable = requests.post) -> Response:
         response = method(f'{self.URL}/{self.VERSION}/{path}',
                           json=data, headers=self.HEADERS)
 
@@ -30,7 +32,7 @@ class PocketApi:
 
         return response
 
-    def get(self):
+    def get(self) -> Dict[str, any]:
         response = self.request('get', {
             'consumer_key': self.CONSUMER_KEY,
             'access_token': self.TOKEN,
@@ -39,7 +41,7 @@ class PocketApi:
 
         return response.json()['list']
 
-    def oauth_request(self):
+    def oauth_request(self) -> str:
         response = self.request('oauth/request', {
             'consumer_key': self.CONSUMER_KEY,
             'redirect_uri': 'task-creator:authorizationFinished'
@@ -47,7 +49,7 @@ class PocketApi:
 
         return response.json()['code']
 
-    def oauth_authorize(self, code):
+    def oauth_authorize(self, code: str) -> dict:
         response = self.request('oauth/authorize', {
             'consumer_key': self.CONSUMER_KEY,
             'code': code
@@ -55,6 +57,6 @@ class PocketApi:
 
         return response.json()
 
-    def redirect_to_auth(self, code: str):
+    def redirect_to_auth(self, code: str) -> None:
         webbrowser.open_new_tab(
             f'{self.URL}/auth/authorize?request_token={code}')

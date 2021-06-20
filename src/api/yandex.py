@@ -3,6 +3,7 @@ import webbrowser
 from urllib import parse
 
 import requests
+from requests.models import Response
 
 
 class YandexApi:
@@ -16,7 +17,7 @@ class YandexApi:
         self.CLIENT_ID = client_id
         self.TOKEN = token
 
-    def request(self, path: str, method: callable = requests.get):
+    def request(self, path: str, method: callable = requests.get) -> Response:
         headers = {
             **self.HEADERS,
             'Authorization': f'OAuth {self.TOKEN}'
@@ -47,6 +48,7 @@ class YandexApi:
 
         return response.json()
 
-    def redirect_to_auth(self):
+    def redirect_to_auth(self) -> None:
         webbrowser.open_new_tab(
-            f'https://oauth.yandex.ru/authorize?response_type=token&client_id={self.CLIENT_ID}')
+            'https://oauth.yandex.ru/authorize?response_type=token'
+            f'&client_id={self.CLIENT_ID}')

@@ -11,7 +11,7 @@ api = TodoistAPI(TODOIST_TOKEN, cache='/tmp/')
 api.sync()
 
 
-def get_project_id(project: str):
+def get_project_id(project: str) -> int:
     projects = api.projects.all(filt=(lambda x: x['name'] == project))
     id = projects[0]['id'] if len(projects) > 0 else None
 

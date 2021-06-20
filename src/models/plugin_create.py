@@ -1,6 +1,6 @@
-from .plugin import Plugin
+from plugins.plugin_create_pocket import plugin_create_pocket
 
-from ..plugins.plugin_create_pocket import plugin_create_pocket
+from .plugin import Plugin
 
 registry = {
     'pocket': plugin_create_pocket
