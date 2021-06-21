@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-from api.yandex import YandexApi
+from src.api.yandex import YandexApi
 
 load_dotenv()
 

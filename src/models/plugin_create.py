@@ -1,4 +1,4 @@
-from plugins.plugin_create_pocket import plugin_create_pocket
+from src.plugins.plugin_create_pocket import plugin_create_pocket
 
 from .plugin import Plugin
 

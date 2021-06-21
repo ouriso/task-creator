@@ -1,4 +1,4 @@
-from plugins.plugin_filter_day import plugin_filter_day
+from src.plugins.plugin_filter_day import plugin_filter_day
 
 from .plugin import Plugin
 

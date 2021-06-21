@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-from .api.pocket import PocketApi
+from src.api.pocket import PocketApi
 
 load_dotenv()
 
