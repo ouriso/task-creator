@@ -18,7 +18,7 @@ def get_project_id(project: str):
     return id
 
 
-def create_task(project: str, content: str, due: str) -> None:
+def create_task(project: str, content: str, due: str = None) -> None:
     if not content:
         return
 
