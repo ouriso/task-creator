@@ -27,5 +27,5 @@ def plugin_create_pocket() -> Dict[str, str]:
     url = item[1].get('resolved_url')
 
     return {
-        'content':  f'[Читать: {title}]({url}) ({id})'
+        'content':  f'Читать: [{title}]({url}) [Pocket](https://getpocket.com/read/{id})'
     }
