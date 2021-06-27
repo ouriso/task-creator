@@ -9,8 +9,12 @@ from .what import What
 class Task(BaseModel):
     what: What
     when: Optional[List[PluginFilter]] = []
+    disabled: Optional[bool] = False
 
     def should_create(self) -> bool:
+        if self.disabled:
+            return False
+
         for plugin in self.when:
             if not plugin.apply():
                 return False
