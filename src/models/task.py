@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 
 from .plugin_filter import PluginFilter
 from .what import What
@@ -10,6 +10,21 @@ class Task(BaseModel):
     what: What
     when: Optional[List[PluginFilter]] = []
     disabled: Optional[bool] = False
+
+    @validator('when', pre=True)
+    def parse_when(cls, v):
+        if not isinstance(v, dict):
+            return v
+        parsed_data = []
+        for key, value in v.items():
+            plugin_data = {
+                "name": key,
+                "params": {
+                    "days": value
+                }
+            }
+            parsed_data.append(PluginFilter(**plugin_data))
+        return parsed_data
 
     def should_create(self) -> bool:
         if self.disabled:

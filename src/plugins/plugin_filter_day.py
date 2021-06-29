@@ -13,8 +13,15 @@ DAYS = [
     'Sun'
 ]
 
-# Mon,Wed-Fri for ['Mon', 'Wed', 'Thu', 'Fri']
-def parse_days(days: str):
+
+def parse_days(days: str) -> List[str]:
+    """
+    Конвертирует строку вида 'Mon,Wed-Fri' в список
+    вида '['Mon', 'Wed', 'Thu', 'Fri']'
+    """
+    if days == 'all':
+        return DAYS
+
     chunks = days.split(',')
     days_list = []
 
@@ -29,7 +36,8 @@ def parse_days(days: str):
     return days_list
 
 
-def plugin_filter_day(days: str):
+def plugin_filter_day(days: str) -> bool:
+    """Содержится ли текущий день недели в полученном списке"""
     days_list = parse_days(days)
 
     return day in days_list
