@@ -19,7 +19,7 @@ def parse_days(days: str) -> List[str]:
     Конвертирует строку вида 'Mon,Wed-Fri' в список
     вида '['Mon', 'Wed', 'Thu', 'Fri']'
     """
-    if days == 'all':
+    if days == 'any':
         return DAYS
 
     chunks = days.split(',')

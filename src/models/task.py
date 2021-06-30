@@ -19,9 +19,7 @@ class Task(BaseModel):
         for key, value in v.items():
             plugin_data = {
                 "name": key,
-                "params": {
-                    "days": value
-                }
+                "params": value
             }
             parsed_data.append(PluginFilter(**plugin_data))
         return parsed_data
@@ -41,13 +39,13 @@ class Task(BaseModel):
             'project': self.what.project,
         }
 
+        if self.what.plugin:
+            params.update(self.what.plugin.apply())
+
         if self.what.content:
             params['content'] = self.what.content
 
         if self.what.due:
             params['due'] = {'string': self.what.due}
-
-        if self.what.plugin:
-            params.update(self.what.plugin.apply())
 
         return params
