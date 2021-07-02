@@ -30,3 +30,8 @@ YANDEX_CLIENT_ID
 YANDEX_TOKEN
 TODOIST_TOKEN
 ```
+
+## Tests
+```
+python -m unittest
+```
