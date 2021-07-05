@@ -3,7 +3,7 @@ from datetime import timedelta
 from unittest import TestCase
 
 from src.plugins.plugin_filter_day import plugin_filter_day
-from src.plugins.plugin_filter_repeat import plugin_filter_repeat
+from src.plugins.plugin_filter_date import plugin_filter_date
 
 
 class TestPlugins(TestCase):
@@ -19,7 +19,7 @@ class TestPlugins(TestCase):
             'days': day,
             'months': month
         }
-        result = plugin_filter_repeat(**params_1)
+        result = plugin_filter_date(**params_1)
         self.assertTrue(result)
 
         params_2 = {
@@ -27,7 +27,7 @@ class TestPlugins(TestCase):
             'days': '1-31',
             'months': str(int(month) - 2)
         }
-        result = plugin_filter_repeat(**params_2)
+        result = plugin_filter_date(**params_2)
         self.assertFalse(result)
 
     def test_plugin_day(self):

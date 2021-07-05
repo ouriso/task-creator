@@ -21,10 +21,11 @@ def plugin_filter_date(from_date: str = None, to_date: str = None,
         result = result and (day < parse_date(to_date))
 
     if days is not None:
-        result = result and (day.strftime('%-d') in parse_list(days, DAYS))
+        result = result and ('{}'.format(day.day) in parse_list(days, DAYS))
 
     if months is not None:
-        result = result and (day.strftime('%-m') in parse_list(months, MONTHS))
+        result = result and ('{}'.format(day.month)
+                             in parse_list(months, MONTHS))
 
     return result
 
