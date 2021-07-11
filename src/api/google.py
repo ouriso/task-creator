@@ -42,7 +42,7 @@ class GoogleApi:
         return events
 
     def build_service(self):
-        return build('calendar', 'v3', self.creds)
+        return build('calendar', 'v3', credentials=self.creds)
 
     def get_or_refresh_token(self):
         creds = self.creds
