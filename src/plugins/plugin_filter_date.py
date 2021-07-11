@@ -9,7 +9,7 @@ FORMAT = '%Y-%m-%d'
 
 
 def plugin_filter_date(from_date: str = None, to_date: str = None,
-                       days: int = None, months: int = None):
+                       days: int = None, months: int = None) -> bool:
 
     day = dt.today()
 
