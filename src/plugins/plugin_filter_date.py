@@ -1,4 +1,4 @@
-from datetime import datetime as dt
+from datetime import date, datetime
 
 from .filter_utils import parse_list
 
@@ -11,14 +11,15 @@ FORMAT = '%Y-%m-%d'
 def plugin_filter_date(from_date: str = None, to_date: str = None,
                        days: int = None, months: int = None) -> bool:
 
-    day = dt.today()
+    day = date.today()
 
     result = True
+
     if from_date is not None:
-        result = result and (day > parse_date(from_date))
+        result = result and (day >= parse_date(from_date))
 
     if to_date is not None:
-        result = result and (day < parse_date(to_date))
+        result = result and (day <= parse_date(to_date))
 
     if days is not None:
         result = result and ('{}'.format(day.day) in parse_list(days, DAYS))
@@ -30,5 +31,5 @@ def plugin_filter_date(from_date: str = None, to_date: str = None,
     return result
 
 
-def parse_date(date_str: str) -> dt:
-    return dt.strptime(date_str, FORMAT)
+def parse_date(date_str: str) -> date:
+    return datetime.strptime(date_str, FORMAT).date()
